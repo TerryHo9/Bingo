@@ -8,6 +8,12 @@ Public Class 解法_遍歷 : Implements I計算最佳盤面
         Dim 紅球紅洞 As Boolean, 紅球黃洞 As Boolean, 黃球黃洞 As Boolean
         Dim 得分 As Integer = 0, 最大得分 As ULong = 0, 連線位 As UInteger = 0, 計算次 As Integer = 0
 
+        Dim 原連線位 As Integer = 0
+        計算次 += 1
+        得分 = 局.計算連線得分() '紀錄原始的連線位置,如不維持原本連線的話,這段註解掉就好
+        If 得分 > 0 Then
+            原連線位 = 局.連線位 And 29197179 '0, 1, 3, 4, 5, 6, 8, 9, 15, 16, 18, 19, 20, 21, 23, 24位元值加總
+        End If
         Dim 未亮燈 As New List(Of Byte)
         For A As Byte = 0 To 3 'worst case:4*4*4*4*231*2
             For B As Byte = 0 To 3
@@ -37,7 +43,8 @@ Public Class 解法_遍歷 : Implements I計算最佳盤面
                                     得分 = 局.計算連線得分()
                                     期望值 = Mo.Get入洞率(號碼(0)) * Mo.Get入洞率(號碼(1)) * 得分
 
-                                    If 期望值 > 最大期望值 Then '目前找最高期望值,也可以變化為最高分或最易得分或是觸發保送優先
+                                    '如果有連線就找原連線的最高期望值,若無找出最某一組合的最佳期望值
+                                    If (原連線位 > 0 AndAlso (原連線位 = (局.連線位 And 29197179)) AndAlso 期望值 > 最大期望值) OrElse (期望值 > 最大期望值) Then
                                         連線位 = 局.連線位
                                         最大得分 = 得分
                                         最大期望值 = 期望值

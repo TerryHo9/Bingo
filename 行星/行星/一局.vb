@@ -101,7 +101,6 @@ Public Class 一局
         Next
     End Sub
     Public Sub CopyFrom(局 As 一局)
-        'Array.Copy(局.宮格s, 0, Me.宮格s, 0, Me.宮格s.Length)
         Array.Copy(局.旋轉次, 0, Me.旋轉次, 0, Me.旋轉次.Length)
         For i As Integer = 0 To Me.宮格s.Length - 1
             Me.宮格s(i).亮燈 = 局.宮格s(i).亮燈
