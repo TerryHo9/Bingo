@@ -60,18 +60,10 @@ Public Class 解法_遍歷改 : Implements I計算最佳盤面
                                         四五球位(0) = 未亮燈(aa) : 四五球位(1) = 未亮燈(bb)
                                         紅球紅洞 = 局.紅球紅洞 : 紅球黃洞 = 局.紅球黃洞 : 黃球黃洞 = 局.黃球黃洞
 
-                                        If ((連線位 And 1) <> 0) OrElse ((連線位 And 2) <> 0) OrElse ((連線位 And 32) <> 0) OrElse ((連線位 And 64) <> 0) Then 'A區有連線
-                                            局.旋轉次(0) = A
-                                        End If
-                                        If ((連線位 And 8) <> 0) OrElse ((連線位 And 16) <> 0) OrElse ((連線位 And 256) <> 0) OrElse ((連線位 And 512) <> 0) Then 'B區有連線
-                                            局.旋轉次(1) = B
-                                        End If
-                                        If ((連線位 And (1 << 15)) <> 0) OrElse ((連線位 And (1 << 16)) <> 0) OrElse ((連線位 And (1 << 20)) <> 0) OrElse ((連線位 And (1 << 21)) <> 0) Then 'C區有連線
-                                            局.旋轉次(2) = C
-                                        End If
-                                        If ((連線位 And (1 << 18)) <> 0) OrElse ((連線位 And (1 << 19)) <> 0) OrElse ((連線位 And (1 << 23)) <> 0) OrElse ((連線位 And (1 << 24)) <> 0) Then 'D區有連線
-                                            局.旋轉次(3) = D
-                                        End If
+                                        If (連線位 And 99) <> 0 Then 局.旋轉次(0) = A 'A區有連線
+                                        If (連線位 And 792) <> 0 Then 局.旋轉次(1) = B 'B區有連線
+                                        If (連線位 And 1671168) <> 0 Then 局.旋轉次(2) = C 'C區有連線
+                                        If (連線位 And 25952256) <> 0 Then 局.旋轉次(3) = D 'D區有連線
                                     End If
 
                                     '還原
